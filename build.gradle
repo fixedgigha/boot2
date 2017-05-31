@@ -44,4 +44,14 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	runtime('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+
+	compile("io.projectreactor:reactor-kotlin-extensions:1.0.0.M2")
+	testCompile("io.projectreactor.addons:reactor-test")
+
+	compile("org.jetbrains.kotlin:kotlin-stdlib-jre8")
+	compile("org.jetbrains.kotlin:kotlin-reflect")
+
+	compile("com.fasterxml.jackson.module:jackson-module-kotlin")
+	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
 }
