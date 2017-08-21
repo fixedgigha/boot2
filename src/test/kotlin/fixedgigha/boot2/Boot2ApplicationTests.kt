@@ -2,7 +2,7 @@ package fixedgigha.boot2
 
 import fixedgigha.boot2.model.Person
 import kotlin.jvm.javaClass
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +17,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON
 import java.time.Duration
 import org.springframework.web.reactive.function.client.bodyToFlux
 import reactor.core.publisher.Flux
-import reactor.core.publisher.test
+import reactor.test.StepVerifier.create
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -30,7 +30,7 @@ class Boot2ApplicationTests {
 	fun loadPeople() {
 		val args = mutableListOf(Person(id = "1", firstName = "Jim", lastName = "Speakman", age = 48))
 		val result = restTemplate.postForEntity("/people", args, args.javaClass)
-		Assert.assertEquals(HttpStatus.OK, result.statusCode)
+		assertEquals(HttpStatus.OK, result.statusCode)
         println("People ${result.body}")
 	}
 
@@ -38,7 +38,7 @@ class Boot2ApplicationTests {
     fun getPeople() {
         val args = mutableListOf<Person>()
         val result = restTemplate.getForEntity("/people?lastName=Speakman", args.javaClass)
-        Assert.assertEquals(HttpStatus.OK, result.statusCode)
+        assertEquals(HttpStatus.OK, result.statusCode)
         println("People ${result.body}")
     }
 
@@ -57,9 +57,9 @@ class Boot2ApplicationTests {
         val flux : Flux<Person> = client.get().uri("/people?lastName=Speakman").accept(APPLICATION_JSON)
                 .retrieve().bodyToFlux()
 
-        flux.test().consumeNextWith {
+        create(flux).consumeNextWith {
             println("Consumed ${it.firstName}")
-            Assert.assertEquals("Jim", it.firstName)
+            assertEquals("Jim", it.firstName)
         }.verifyComplete()
 
 

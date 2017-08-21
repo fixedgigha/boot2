@@ -1,7 +1,7 @@
 buildscript {
 	ext {
-		kotlinVersion = '1.1.2'
-		springBootVersion = '2.0.0.M1'
+		kotlinVersion = '1.1.4'
+		springBootVersion = '2.0.0.M3'
 	}
 	repositories {
 		mavenCentral()
@@ -50,8 +50,9 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	runtime('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 
-	compile("io.projectreactor:reactor-kotlin-extensions:1.0.0.M2")
-	testCompile("io.projectreactor.addons:reactor-test")
+	compile("io.projectreactor:reactor-core:3.1.0.M3")
+	//compile("io.projectreactor:reactor-netty:0.6.4.RELEASE")
+	testCompile("io.projectreactor:reactor-test:3.1.0.M3")
 
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jre8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
